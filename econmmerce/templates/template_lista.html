@@ -1,3 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}
+    Template con lista
+{% endblock %}
+
+
+{% block contenido_que_cambia %}
+
 {% for elemento in lista %}
 
     {% if elemento == 'banana'%}
@@ -20,3 +30,4 @@
     {% endif%}
 
 {% endfor%} 
+{% endblock %}
