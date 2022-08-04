@@ -8,4 +8,4 @@ def create_article(request):
         author = 'Juan Ignasio Tessio'
         )
     context = { 'new_article' : new_article}
-    return render(request, 'new_article.html', context=context)
+    return render(request, 'articles/new_article.html', context=context)
