@@ -11,6 +11,9 @@ class Products(models.Model):
     creation_date = models.DateField(auto_now_add= True, null=True, blank=True)          #con el () me dice que se ingrese el valor por default
     stock = models.IntegerField()
 
+    def __str__(self):
+        return self.name
+
 class Category(models.Model):
     name = models.CharField(max_length=50)
     
