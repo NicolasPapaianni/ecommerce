@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.shortcuts import redirect
 from products.models import Products
 from products.forms import Formulario_productos
 
@@ -8,12 +9,19 @@ from products.forms import Formulario_productos
 def create_product(request):
 
 
+
     if request.method == 'POST':
-        pass
-    #     new_product = Products.objects.create(name = 'Crush 500 ml', price = 150, stock= 30)
-    #     context = {
-    #         'new_product' : new_product
-    # }
+        form = Formulario_productos(request.POST)
+
+        if form.is_valid():
+            Products.objects.create(
+                name = form.cleaned_data['name'],
+                price = form.cleaned_data['price'],
+                description = form.cleaned_data['description'],
+                stock = form.cleaned_data['stock']
+            ) 
+
+            return redirect(list_products)
 
     elif request.method == 'GET':
         form = Formulario_productos
