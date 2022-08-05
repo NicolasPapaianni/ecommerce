@@ -41,3 +41,10 @@ def primer_formulario(request):
     if request.method == 'POST':
         print(request.POST)
     return render(request, 'products/primer_formulario.html', context={})   
+
+
+def search_products(request):
+    search = request.GET['search']
+    products= Products.objects.filter(name__icontains=search)
+    context = {'products': products}
+    return render(request, 'products/search_product.html', context = context)

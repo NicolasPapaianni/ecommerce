@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    
+  Busqueda productos
+
+{% endblock %}
+
+
+{% block contenido_que_cambia %}
+
+    {% for product in products %} 
+    <div class="card" style="width: 18rem;">
+        <img src="https://merkandi.it/images/offer/dsc-2755-1-1623738690.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">precio: {{product.price}} </p>
+            <p class="card-text">stock: {{product.stock}} </p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+
+    {% endfor %}
+
+{% endblock %}
