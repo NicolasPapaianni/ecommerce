@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    
+    Primer formulario
+
+{% endblock %}
+
+
+{% block contenido_que_cambia %}
+
+<p><form action="" method='POST'></p>
+{% csrf_token %}
+
+    <p><input type="text" name='ususario' placeholder="ususario"></p>  
+
+    <p><input type="text" name="contraseña" placeholder="contaseña"></p>
+
+    <p><input type="submit" name="enviar"></p>
+
+</form>
+
+
+{% endblock %}
