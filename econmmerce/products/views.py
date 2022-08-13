@@ -29,7 +29,7 @@ def create_product(request):
         return render( request, 'products/new_product.html', context=context)
 
 def list_products(request):
-    products = Products.objects.all()
+    products = Products.objects.all()           # Trae todos
     context = {
         'products': products
     }
@@ -45,6 +45,51 @@ def primer_formulario(request):
 
 def search_products(request):
     search = request.GET['search']
-    products= Products.objects.filter(name__icontains=search)
+    products= Products.objects.filter(name__icontains=search)    #Trae los que cumplan la condicion
     context = {'products': products}
     return render(request, 'products/search_product.html', context = context)
+
+
+def delete_product(request, pk):            # pk = id
+    if request.method == 'GET':
+        product = Products.objects.get(pk=pk)
+        context = {'product': product}
+        return render(request, 'products/delete_product.html', context = context)
+                                                                                                                                                                                            
+    elif request.method == 'Post':
+        product = Products.objects.get(pk=pk)
+        product.delete()
+        return redirect(list_products)
+
+def update_product(request, pk):
+    if request.method == 'POST':
+        form = Formulario_productos(request.POST)
+        if form.is_valid():
+            product = Products.objects.get(id=pk)
+            product.name = form.cleaned_data['name']
+            product.price = form.cleaned_data['price']
+            product.description = form.cleaned_data['description']
+            product.stock = form.cleaned_data['stock']
+            product.save()
+
+            return redirect(list_products)
+
+
+    elif request.method == 'GET':
+        product = Products.objects.get(id=pk)
+        form = Formulario_productos(initial= {
+                'name': product.name, 
+                'precio': product.price, 
+                'descripcion': product.description,
+                'stock': product.stock
+                })
+        context = {'form': form}
+        return render(request, 'products/update_product.html', context = context)
+
+
+
+#Products.objects.get(id=1)    #Trae solo el objeto que cumpla la condicion
+
+
+
+
